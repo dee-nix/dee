@@ -15,14 +15,11 @@ impl EventHandler for Handler {
 }
 #[tokio::main]
 async fn main() {
-    // Login with a bot token from the environment
-    let token = std::env::var("DISCORD_TOKEN").expect("Expected a token in the environment");
-    // Set gateway intents, which decides what events the bot will be notified about
+    let token = std::env::var("TOKEN").expect("Expected a token in the environment");
     let intents = GatewayIntents::GUILD_MESSAGES
         | GatewayIntents::DIRECT_MESSAGES
         | GatewayIntents::MESSAGE_CONTENT;
-
-    // Create a new instance of the Client, logging in as a bot.
+    // Client Instance
     let mut client =
         Client::builder(&token, intents).event_handler(Handler).await.expect("Error creating client");
 
