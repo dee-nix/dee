@@ -1,8 +1,7 @@
-use serenity::async_trait;
-use serenity::model::channel::Message;
 use serenity::prelude::*;
+use serenity::async_trait;
+use serenity::all::Message;
 struct Handler;
-
 #[async_trait]
 impl EventHandler for Handler {
     async fn message(&self, ctx: Context, msg: Message) {
@@ -19,11 +18,9 @@ async fn main() {
     let intents = GatewayIntents::GUILD_MESSAGES
         | GatewayIntents::DIRECT_MESSAGES
         | GatewayIntents::MESSAGE_CONTENT;
-    // Client Instance
-    let mut client =
-        Client::builder(&token, intents).event_handler(Handler).await.expect("Error creating client");
 
-    // Start listening for events by starting a single shard
+    let mut client = Client::builder(&token, intents).event_handler(Handler).await.expect("Error creating client");
+
     if let Err(why) = client.start().await {
         println!("Client error: {why:?}");
     }
